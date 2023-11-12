@@ -22,10 +22,23 @@ namespace ConcertDB.Controllers
         // GET: Tickecs
         public async Task<IActionResult> Index()
         {
+
+
+
+
               return _context.Tickets != null ? 
                           View(await _context.Tickets.ToListAsync()) :
                           Problem("Entity set 'DataBaseContext.Tickets'  is null.");
+           
         }
+        private void ValidateTicket()
+
+        {
+
+        }
+
+
+
 
         // GET: Tickecs/Details/5
         public async Task<IActionResult> Details(Guid? id)
