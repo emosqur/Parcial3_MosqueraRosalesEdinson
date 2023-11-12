@@ -13,14 +13,14 @@ namespace ConcertDB.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Tickets>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<Tickec>().HasIndex(c => c.TicketID).IsUnique();
 
         }
        
 
 
 
-        public DbSet<Tickets> Ticketss{ get; set; }
+        public DbSet<Tickec> Tickets{ get; set; }
 
 
     }
