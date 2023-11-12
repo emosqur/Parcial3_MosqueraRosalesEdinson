@@ -101,6 +101,7 @@ namespace ConcertDB.Controllers
             {
                 try
                 {
+                    tickec.ModifiedDate = DateTime.Now;
                     _context.Update(tickec);
                     await _context.SaveChangesAsync();
                 }
