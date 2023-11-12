@@ -60,14 +60,42 @@ namespace ConcertDB.Controllers
         {
             if (ModelState.IsValid)
             {
-                tickec.Id = Guid.NewGuid();
-                tickec.CreateDate = DateTime.Now;
-                _context.Add(tickec);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    tickec.Id = Guid.NewGuid();
+                    tickec.CreateDate = DateTime.Now;
+                    _context.Add(tickec);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException dbUpdateException)
+                {
+                    if (dbUpdateException.InnerException.Message.Contains("duplicado"))
+                    {
+                        ModelState.AddModelError(string.Empty, "El boleto ya fue resgistrado!.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+
             }
+
             return View(tickec);
         }
+
+
+
+
+
+
+
+
 
         // GET: Tickecs/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
