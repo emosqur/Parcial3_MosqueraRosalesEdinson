@@ -61,6 +61,7 @@ namespace ConcertDB.Controllers
             if (ModelState.IsValid)
             {
                 tickec.Id = Guid.NewGuid();
+                tickec.CreateDate = DateTime.Now;
                 _context.Add(tickec);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
